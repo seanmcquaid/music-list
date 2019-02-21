@@ -23,4 +23,12 @@ router.post("/addMusic", (req,res,next)=>{
   })
 })
 
+router.get("/getMusic", (req,res,next)=>{
+  const getMusicQuery = `SELECT * FROM musicToListen;`;
+  connection.query(getMusicQuery, (err,results)=>{
+    if(err){throw err};
+    res.json(results);
+  })
+})
+
 module.exports = router;

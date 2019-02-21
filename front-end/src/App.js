@@ -15,6 +15,14 @@ class App extends Component {
   }
 
   componentDidMount(){
+    axios({
+      method : "GET",
+      url : "http://localhost:3000/getMusic"
+    }).then((musicInfoFromBackEnd)=>{
+      this.setState({
+        musicInfo : musicInfoFromBackEnd.data
+      })
+    })
   }
 
   addNewTask = (song, artist)=>{
@@ -28,7 +36,10 @@ class App extends Component {
         artistName : artist
       }
     }).then((dataFromDatabase)=>{
-      console.log(dataFromDatabase);
+      // console.log(dataFromDatabase)
+      this.setState({
+        musicInfo : dataFromDatabase.data
+      })
     })
   }
 
@@ -38,6 +49,7 @@ class App extends Component {
         <div className="App">
           <Navbar/>
           <Route path ="/" render={()=><Home addNewTask={this.addNewTask} musicInfo = {this.state.musicInfo}/>}/>
+          {/* still need to do edit and delete */}
         </div>
       </Router>
     );

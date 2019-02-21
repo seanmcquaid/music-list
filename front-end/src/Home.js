@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from "react-router-dom";
 
 class Home extends Component {
     constructor(){
@@ -31,6 +32,15 @@ class Home extends Component {
 
     render(){
         // console.log(this.state)
+        const userSongs = this.props.musicInfo.map((songInfo)=>{
+            return(
+                <tr key={songInfo.id}>
+                <td>{songInfo.songName} - {songInfo.artistName}</td>
+                <td><button className="btn red">Delete</button></td>
+                <td><Link to={"/edit/"+songInfo.id}><button className="btn blue">Edit</button></Link></td>
+            </tr>
+            )
+        })
         return(
             <div className="to-do-app">      
                 <div className="section no-pad-bot" id="index-banner">
@@ -56,7 +66,7 @@ class Home extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            {userSongs}
                         </tbody>
                     </table>
                 </div>
