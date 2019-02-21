@@ -9,6 +9,12 @@ class Home extends Component {
         }
     }
 
+    addNewTask = (event)=>{
+        // console.log("submitted form")
+        event.preventDefault();
+        this.props.addNewTask(this.state.songName, this.state.artistName)
+    }
+
     changeSong = (event)=>{
         // console.log(event.target.value)
         this.setState({
@@ -24,7 +30,7 @@ class Home extends Component {
     }
 
     render(){
-        console.log(this.state)
+        // console.log(this.state)
         return(
             <div className="to-do-app">      
                 <div className="section no-pad-bot" id="index-banner">
@@ -36,7 +42,7 @@ class Home extends Component {
                     </div>
                 </div>    
                 <div className="container">
-                    <form className="add-box">
+                    <form onSubmit={this.addNewTask} className="add-box">
                         <input onChange={this.changeSong} type="text" id="new-song" placeholder="Enter Song Name Here"/>
                         <input onChange={this.changeArtist} type="text" id="new-artist" placeholder="Enter Artist Here"/>
                         <button type="submit" className="btn btn-primary">Add Song</button>
