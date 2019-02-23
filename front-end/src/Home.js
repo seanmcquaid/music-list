@@ -10,10 +10,10 @@ class Home extends Component {
         }
     }
 
-    addNewTask = (event)=>{
+    addNewSong = (event)=>{
         // console.log("submitted form")
         event.preventDefault();
-        this.props.addNewTask(this.state.songName, this.state.artistName)
+        this.props.addNewSong(this.state.songName, this.state.artistName)
     }
 
     changeSong = (event)=>{
@@ -52,7 +52,7 @@ class Home extends Component {
                     </div>
                 </div>    
                 <div className="container">
-                    <form onSubmit={this.addNewTask} className="add-box">
+                    <form onSubmit={this.addNewSong} className="add-box">
                         <input onChange={this.changeSong} type="text" id="new-song" placeholder="Enter Song Name Here"/>
                         <input onChange={this.changeArtist} type="text" id="new-artist" placeholder="Enter Artist Here"/>
                         <button type="submit" className="btn btn-primary">Add Song</button>

@@ -4,6 +4,7 @@ import './App.css';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";
+import Edit from "./Edit"
 
 
 class App extends Component {
@@ -25,9 +26,7 @@ class App extends Component {
     })
   }
 
-  addNewTask = (song, artist)=>{
-    // console.log(songName)
-    // console.log(artistName)
+  addNewSong = (song, artist)=>{
     axios({
       method: "POST",
       url : "http://localhost:3000/addMusic",
@@ -48,8 +47,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar/>
-          <Route path ="/" render={()=><Home addNewTask={this.addNewTask} musicInfo = {this.state.musicInfo}/>}/>
+          <Route path ="/" render={()=><Home addNewSong={this.addNewSong} musicInfo = {this.state.musicInfo}/>}/>
           {/* still need to do edit and delete */}
+          <Route exact path ="/edit/:id" component={Edit}/>
         </div>
       </Router>
     );
