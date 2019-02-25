@@ -31,4 +31,13 @@ router.get("/getMusic", (req,res,next)=>{
   })
 })
 
+router.get("/getMusic/:songid", (req,res,next)=>{
+  const musicId = req.params.songid;
+  const selectMusicQuery = `SELECT * FROM musicToListen where id = ?;`;
+  connection.query(selectMusicQuery,[musicId], (err,result)=>{
+    if(err){throw err};
+    res.json({song : result[0]});
+  })
+})
+
 module.exports = router;

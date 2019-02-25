@@ -11,7 +11,16 @@ class Edit extends Component{
 
     componentDidMount(){
         const songId = this.props.match.params.id;
-        console.log(songId)
+        // console.log(songId)
+        axios({
+            method: "GET",
+            url: `http://localhost:3000/getMusic/${songId}`
+        }).then((musicFromBackEnd)=>{
+            // console.log(musicFromBackEnd);
+            this.setState({
+                song : musicFromBackEnd.data.song
+            });
+        })
     }
 
     changeSong = (event)=>{
@@ -32,7 +41,12 @@ class Edit extends Component{
         }) 
     }
 
+    editSong = (event) =>{
+        event.preventDefault();
+    }
+
     render(){
+        console.log(this.state.song)
         return(
             <div className="container">
                 <form onSubmit={this.editSongInfo} className="add-box">
