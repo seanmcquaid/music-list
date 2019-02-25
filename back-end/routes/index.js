@@ -40,4 +40,18 @@ router.get("/getMusic/:songid", (req,res,next)=>{
   })
 })
 
+router.post("/edit", (req,res,next)=>{
+  console.log(req.body.id)
+  const id = req.body.song.id;
+  const songName = req.body.song.songName;
+  const artistName = req.body.song.artistName;
+  const updateQuery = `UPDATE musicToListen SET songName = ?, artistName = ? WHERE id = ?;`;
+  connection.query(updateQuery,[songName,artistName,id], (error,result)=>{
+    if(error){throw error};
+    res.json({
+      msg : "updated"
+    })
+  })
+})
+
 module.exports = router;

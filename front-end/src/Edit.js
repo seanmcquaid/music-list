@@ -41,12 +41,25 @@ class Edit extends Component{
         }) 
     }
 
-    editSong = (event) =>{
+    editSongInfo = (event) =>{
         event.preventDefault();
+        axios({
+            method: "POST",
+            data: {
+                song : this.state.song,
+                id : this.props.match.params.id
+            },
+            url : `http://localhost:3000/edit/`
+        }).then((jsonData)=>{
+            // console.log(jsonData)
+            if(jsonData.data.msg === "updated"){
+                this.props.history.push("/")
+            }
+        })
     }
 
     render(){
-        console.log(this.state.song)
+        // console.log(this.state.song)
         return(
             <div className="container">
                 <form onSubmit={this.editSongInfo} className="add-box">
